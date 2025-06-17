@@ -72,8 +72,7 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ error: "User not found." });
     }
 
-    // Hash password
-    const isPasswordMatch = bcrypt.compare(password, existingUser.password);
+    const isPasswordMatch = await bcrypt.compare(password, existingUser.password);
     if(!isPasswordMatch){
       return res.status(400).josn({error:"Incorrect password"});
     }
