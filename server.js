@@ -3,6 +3,7 @@ import connectDb from "./utils/connectDb.js";
 import dotenv from "dotenv";
 import cors from "cors";
 import { HabitRouter } from "./router/HabitRoute.js";
+import { AuthRouter } from "./router/UserRouter.js";
 
 dotenv.config();
 
