@@ -1,7 +1,7 @@
 import express from "express";
-import { createHabit } from "../controller/CreateHabit.js";
+import { createHabit } from "../controller/Habit.js";
 
 
 export const HabitRouter = express.Router();
 
-HabitRouter.use("/", createHabit);
+HabitRouter.use("/create", createHabit);
