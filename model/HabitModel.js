@@ -24,6 +24,10 @@ const HabitSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+   streak: {
+    type: Number,
+    default: 0
+  },
   completedDates: {
     type: [Date], // dates the user completed the habit
     default: [],
