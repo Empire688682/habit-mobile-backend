@@ -74,8 +74,8 @@ const loginUser = async (req, res) => {
 
     const isPasswordMatch = await bcrypt.compare(password, existingUser.password);
     if(!isPasswordMatch){
-      return res.status(400).josn({error:"Incorrect password"});
-    }
+      return res.status(400).json({error:"Incorrect password"});
+    };
 
     // Generate JWT token
     const token = jwt.sign(
@@ -94,7 +94,7 @@ const loginUser = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.error("createUser error:", error);
+    console.error("Login error:", error);
     res.status(500).json({ error: "Server error" });
   }
 };
