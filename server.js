@@ -13,7 +13,7 @@ const port = process.env.PORT;
 //config
 app.use(express.json());
 app.use(cors());
-app.use("/users", UserRouter);
+app.use("/auth", AuthRouter );
 app.use ("/habits", HabitRouter);
 
 //Db

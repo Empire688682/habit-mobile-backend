@@ -55,4 +55,49 @@ const createUser = async (req, res) => {
   }
 };
 
-export { createUser };
+const loginUser = async (req, res) => {
+  await connectDb();
+
+  try {
+    const {email, password } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+      return res.status(400).json({ error: "Please fill in all fields." });
+    }
+
+    // Check if user already exists
+    const existingUser = await UserModel.findOne({ email });
+    if (!existingUser) {
+      return res.status(400).json({ error: "User not found." });
+    }
+
+    // Hash password
+    const isPasswordMatch = bcrypt.compare(password, existingUser.password);
+    if(!isPasswordMatch){
+      return res.status(400).josn({error:"Incorrect password"});
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: existingUser._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    // Return user info + token
+    res.status(201).json({
+      user: {
+        id: existingUser._id,
+        name: existingUser.name,
+        email: existingUser.email,
+      },
+      token,
+    });
+  } catch (error) {
+    console.error("createUser error:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+export { createUser, loginUser };
