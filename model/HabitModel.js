@@ -32,10 +32,6 @@ const HabitSchema = new mongoose.Schema({
     type: [Date], // dates the user completed the habit
     default: [],
   },
-  streak: {
-    type: Number,
-    default: 0,
-  },
   lastCompleted: {
     type: Date,
   }
