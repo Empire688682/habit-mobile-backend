@@ -1,7 +1,7 @@
 import { HabitModel } from "../model/HabitModel.js";
 import { UserModel } from "../model/UserModel.js";
 import connectDb from "../utils/connectDb.js";
-import {startOfDay, differenceInCalendarDays, isSameDay, format} from "date-fns"
+import {startOfDay, differenceInCalendarDays, isSameDay} from "date-fns"
 
 const createHabit = async (req, res) => {
   await connectDb();
@@ -101,7 +101,7 @@ const dailyCompleteHabit = async (req, res) =>{
     const lastCompleted = habit.lastCompleted ? startOfDay(habit.lastCompleted) : null;
 
     if(lastCompleted && isSameDay(today, lastCompleted) ){
-      return res.status(400).json({ error: "Habit already completed today" });
+      return null
     };
 
     let newStreak = 1;
